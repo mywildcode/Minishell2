@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/libft.h"
-#include "../minishell2.h"
+#include "libft/libft.h"
+#include "minishell2.h"
 
 static t_read		*ft_freeread(t_read *red, t_read *prev, t_read **start)
 {

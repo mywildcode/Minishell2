@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   other_functions.c                                  :+:      :+:    :+:   */
+/*   func1.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ql-eilde <ql-eilde@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/01/11 17:31:01 by ql-eilde          #+#    #+#             */
-/*   Updated: 2015/01/30 16:13:26 by ql-eilde         ###   ########.fr       */
+/*   Created: 2015/02/03 14:20:19 by ql-eilde          #+#    #+#             */
+/*   Updated: 2015/02/03 14:20:21 by ql-eilde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,25 +31,6 @@ char	*ft_getenv(char **env, char *elem)
 char	**ft_getpaths(char *elem)
 {
 	return (ft_strsplit(elem, ':'));
-}
-
-void	ft_executebin(char **str, char **env)
-{
-	char	*cpy;
-	char	*bin;
-	int		i;
-	int		j;
-
-	i = 0;
-	j = 0;
-	cpy = (char *)malloc(sizeof(char) * ft_strlen(str[0]) + 1);
-	while (str[0][i] != '/')
-		i++;
-	i++;
-	while (str[0][i] != '\0')
-		cpy[j] = str[0][i], i++, j++;
-	cpy[j] = '\0';
-	bin = cpy, free(cpy), execute_program(bin, str, env);
 }
 
 int		ft_len(t_env *e)

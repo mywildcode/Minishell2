@@ -6,17 +6,16 @@
 #    By: ql-eilde <ql-eilde@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/04 12:08:08 by ql-eilde          #+#    #+#              #
-#    Updated: 2015/01/30 16:14:31 by ql-eilde         ###   ########.fr        #
+#    Updated: 2015/02/03 15:47:32 by ql-eilde         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = ft_minishell2
 
-SRC = minishell2.c gnl/get_next_line.c builtins.c other_functions1.c \
-	  other_functions2.c other_functions3.c
+SRC = main.c get_next_line.c func1.c func2.c pipe.c init.c \
+		controller.c exec.c builtins.c redir.c
 
-OBJ = minishell2.o get_next_line.o builtins.o other_functions1.o \
-	  other_functions2.o other_functions3.o
+OBJ = $(SRC:.c=.o)
 
 FLAGS = -Wall -Wextra -Werror
 
@@ -27,12 +26,16 @@ all: $(NAME)
 $(NAME):
 	@make -C libft/ fclean
 	@make -C libft/
-	@gcc $(FLAGS) -I libft/ -c gnl/get_next_line.c
-	@gcc $(FLAGS) -I libft/ -c minishell2.c
+	@gcc $(FLAGS) -I libft/ -c get_next_line.c
+	@gcc $(FLAGS) -I libft/ -c main.c
 	@gcc $(FLAGS) -I libft/ -c builtins.c
-	@gcc $(FLAGS) -I libft/ -c other_functions1.c
-	@gcc $(FLAGS) -I libft/ -c other_functions2.c
-	@gcc $(FLAGS) -I libft/ -c other_functions3.c
+	@gcc $(FLAGS) -I libft/ -c func1.c
+	@gcc $(FLAGS) -I libft/ -c func2.c
+	@gcc $(FLAGS) -I libft/ -c pipe.c
+	@gcc $(FLAGS) -I libft/ -c init.c
+	@gcc $(FLAGS) -I libft/ -c controller.c
+	@gcc $(FLAGS) -I libft/ -c exec.c
+	@gcc $(FLAGS) -I libft/ -c redir.c
 	@gcc -o $(NAME) $(OBJ) $(LFTFLAGS)
 	@echo "$(NAME) has been created"
 

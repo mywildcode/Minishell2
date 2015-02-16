@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   other_functions3.c                                 :+:      :+:    :+:   */
+/*   func2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ql-eilde <ql-eilde@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/01/11 17:46:37 by ql-eilde          #+#    #+#             */
-/*   Updated: 2015/01/30 19:28:56 by ql-eilde         ###   ########.fr       */
+/*   Created: 2015/02/03 14:20:33 by ql-eilde          #+#    #+#             */
+/*   Updated: 2015/02/05 19:16:40 by ql-eilde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,39 +60,27 @@ char	*ft_new_var(char **str)
 	return (var);
 }
 
-int		is_sh2(char *str, t_env *env)
+char	**ft_strsplit_spe(char *str, char *split)
 {
-	char		*line;
-	char		*ptr;
-	long int	i;
+	char	**ret;
+	int		i;
+	int		j;
 
 	i = 0;
-	if ((ptr = strchr(str, ';')) != NULL)
+	j = 0;
+	ret = (char **)malloc(sizeof(ret));
+	ret[0] = (char *)malloc(sizeof(char) * 100);
+	while (str[i] != split[0])
 	{
-		line = (char *)malloc(sizeof(line) * (ptr - str) + 1);
-		while (i < (ptr - str))
-			line[i] = str[i], i++;
-		if (is_pipe_redir(line) == 1)
-			which_ops(line, env);
+		ret[0][j] = str[i], i++, j++;
+		if (str[i] == split[1])
+			break ;
 	}
-	return (1);
-}
-
-int		is_pipe_redir(char *line)
-{
-	if (strchr(line, '|') != NULL || strstr(line, "<<") != NULL ||
-			strstr(line, ">>") != NULL || strchr(line, '<') != NULL ||
-			strchr(line, '>') != NULL)
-		return (1);
-	return (0);
-}
-
-void	which_ops(char *str, t_env *env)
-{
-	char	**str2;
-
-	str2 = ft_strsplit(str, ' ');
-	if (strchr(str, '|') != NULL)
-		ft_pipe();
-	return ;
+	ret[0][j] = '\0';
+	j = 0, i++, i++;
+	ret[1] = (char *)malloc(sizeof(char) * 100);
+	while (str[i] != '\0')
+		ret[1][j] = str[i], i++, j++;
+	ret[1][j] = '\0';
+	return (ret);
 }
